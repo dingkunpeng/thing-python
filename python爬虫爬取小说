@@ -1,0 +1,81 @@
+
+import requests
+
+if __name__ == '__main__':
+    target = 'http://www.biquge.cm/6/6217/3638117.html'
+    req = requests.get(url=target)
+    print(req.text)
+    
+
+import requests
+
+if __name__ == '__main__':
+    target = 'http://www.biquge.cm/6/6217/3638117.html'
+    req = requests.get(url=target)
+    req.encoding = 'ghk'
+    # 我们可以在调用response.text()之前使用response.encoding='编码格式'
+    print(req.text)
+
+
+import requests
+
+if __name__ == '__main__':
+    target = 'http://www.biquge.cm/6/6217/3638117.html'
+    req = requests.get(url=target)
+    html =req.content
+    #使用req.content返回的是bytes型的数据
+    html_doc=str(html,'gbk')
+    #然后将bytes型数据转化为str数据
+    print(html_doc)
+    #获取文章内容
+    
+    
+from bs4 import BeautifulSoup
+
+import requests
+
+if __name__ == "__main__":
+    target = 'http://www.biquge.cm/6/6217/3638117.html'
+    req = requests.get(url=target)
+    html = req.content
+    html_doc = str(html,'gbk')
+    bf = BeautifulSoup(html_doc)
+    texts = bf.find_all('div',id="content")
+    print(texts)
+
+from bs4 import BeautifulSoup
+import requests
+if __name__ == "__main__":
+    target = 'http://www.biquge.cm/6/6217/3638117.html'
+    req = requests.get(url = target)
+    html = req.content
+    html_doc=str(html,'gbk')
+    bf = BeautifulSoup(html_doc)
+    texts = bf.find_all('div', id="content")
+    print(texts[0].text)
+
+from bs4 import BeautifulSoup
+import requests
+if __name__ == "__main__":
+    target = 'http://www.biquge.cm/6/6217/'
+    req = requests.get(url = target)
+    html = req.content
+    html_doc=str(html,'gbk')
+    div_bf = BeautifulSoup(html_doc)
+    div = div_bf.find_all('div',id='list')
+    print(div[0])
+
+from bs4 import BeautifulSoup
+import requests
+if __name__ == "__main__":
+    server = 'http://www.biquge.cm/'
+    target = 'http://www.biquge.cm/6/6217'
+    req = requests.get(url = target)
+    html = req.content
+    html_doc=str(html,'gbk')
+    div_bf = BeautifulSoup(html_doc)
+    div = div_bf.find_all('div', id='list')
+    a_bf = BeautifulSoup(str(div[0]))
+    a = a_bf.find_all('a')
+    for each in a :
+        print(each.string,server + each.get('href'))
